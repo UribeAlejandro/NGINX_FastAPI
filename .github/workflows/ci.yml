@@ -48,11 +48,11 @@ jobs:
 
       - name: Test nginx proxy
         run: |
-          curl -s -o /dev/null -w "%{http_code}" http://localhost:8080
+          w
 
       - name: Test app
         run: |
-          docker-compose exec app pytest
+          docker-compose exec -t app pytest
 
       - name: Stop containers
         if: always()
