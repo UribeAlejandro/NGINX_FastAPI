@@ -42,12 +42,19 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-#      - name: Docker Compose with Tests Action
-#        run: |
-#          docker-compose up --build -d &&
-#          docker-compose exec -t app pip install pytest && pytest
+      - name: Start containers
+        run: |
+          docker-compose up --build -d
 
       - name: Test nginx proxy
         run: |
-          docker-compose up --build -d &&
           curl -s -o /dev/null -w "%{http_code}" http://localhost:8080
+
+      - name: Test app
+        run: |
+          pytest
+
+      - name: Stop containers
+        if: always()
+        run: |
+          docker-compose down -v
