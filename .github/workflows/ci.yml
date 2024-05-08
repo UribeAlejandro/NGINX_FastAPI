@@ -41,19 +41,14 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      - name: Docker Compose Action
-        uses: hoverkraft-tech/compose-action@v2.0.0
+      - name: Docker Compose with Tests Action
+        uses: adambirds/docker-compose-action@v1.3.0
         with:
-          compose-file: ./docker-compose.yml
-          up-flags: -d
-          services:
-            app
-            nginx-proxy
+          compose-file: "./docker-compose.yml"
+          test-container: "app"
+          test-command: "pip install pytest && pytest"
 
       - name: Test nginx proxy
         run: |
+          docker-compose up --build -d &&
           curl -s -o /dev/null -w "%{http_code}" http://localhost:8080
-
-      - name: Test app with pytest
-        run: |
-          docker-compose exec app pip install pytest && pytest
