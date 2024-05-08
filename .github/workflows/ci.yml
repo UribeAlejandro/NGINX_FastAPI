@@ -43,11 +43,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Docker Compose with Tests Action
-        uses: adambirds/docker-compose-action@v1.3.0
-        with:
-          compose-file: "./docker-compose.yml"
-          test-container: "app"
-          test-command: pytest
+        run: |
+          docker-compose up --build -d
+          docker-compose exec app pip install pytest && pytest
 
       - name: Test nginx proxy
         run: |
