@@ -46,9 +46,11 @@ jobs:
         with:
           compose-file: "./docker-compose.yml"
           test-container: "app"
-          test-command: "pip install pytest && pytest"
+          test-command: |
+            pip install pytest \
+            pytest
 
       - name: Test nginx proxy
         run: |
-          docker-compose up --build -d &&
+          docker-compose up --build -d \
           curl -s -o /dev/null -w "%{http_code}" http://localhost:8080
