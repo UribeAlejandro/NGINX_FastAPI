@@ -52,7 +52,7 @@ jobs:
 
       - name: Test app
         run: |
-          pytest
+          docker-compose exec -t app pytest
 
       - name: Stop containers
         if: always()
