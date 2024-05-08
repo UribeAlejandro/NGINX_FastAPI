@@ -28,12 +28,13 @@ To run the application on top of Docker, build and run the image:
 docker-compose up --build -d
 ```
 
+The application should be running on `http://localhost:8080`, not in `http://localhost:8080` due to the NGINX configuration.
+
 To stop the application, run:
 
 ```bash
 docker-compose down -v
 ```
-
 
 ## Testing
 
@@ -43,7 +44,7 @@ To test the application, using the virtual environment, run:
 pytest
 ```
 
-Or, using Docker:
+Or, using Docker without NGINX:
 
 ```bash
 docker-compose exec app pip install pytest && pytest

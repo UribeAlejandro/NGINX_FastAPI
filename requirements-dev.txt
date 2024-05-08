@@ -5,6 +5,4 @@ black
 black[jupyter]
 isort
 docformatter
-pytest
-pytest-cov
 pre-commit
