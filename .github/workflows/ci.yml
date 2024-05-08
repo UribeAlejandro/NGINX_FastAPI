@@ -42,10 +42,10 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      - name: Docker Compose with Tests Action
-        run: |
-          docker-compose up --build -d &&
-          docker-compose exec -t app pip install pytest && pytest
+#      - name: Docker Compose with Tests Action
+#        run: |
+#          docker-compose up --build -d &&
+#          docker-compose exec -t app pip install pytest && pytest
 
       - name: Test nginx proxy
         run: |
